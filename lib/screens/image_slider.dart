@@ -10,7 +10,14 @@ class _ImageSliderState extends State<ImageSlider> {
   @override
   Widget build(BuildContext context) {
     return CarouselSlider(
-      options: CarouselOptions(autoPlay: true, viewportFraction: 1),
+      options: CarouselOptions(
+        autoPlay: true,
+        enlargeCenterPage: true,
+        autoPlayCurve: Curves.fastOutSlowIn,
+        enableInfiniteScroll: true,
+        viewportFraction: 0.95,
+        autoPlayAnimationDuration: Duration(milliseconds: 800),
+      ),
       items: [
         Container(
           width: MediaQuery.of(context).size.width,
@@ -18,7 +25,7 @@ class _ImageSliderState extends State<ImageSlider> {
           decoration: BoxDecoration(
             image: DecorationImage(
               fit: BoxFit.fill,
-              image: AssetImage("assets/images/food1.jpg"),
+              image: AssetImage("assets/images/food6.jpg"),
             ),
           ),
         ),
@@ -28,7 +35,7 @@ class _ImageSliderState extends State<ImageSlider> {
           decoration: BoxDecoration(
             image: DecorationImage(
               fit: BoxFit.fill,
-              image: AssetImage("assets/images/food2.jpg"),
+              image: AssetImage("assets/images/food5.jpg"),
             ),
           ),
         ),
