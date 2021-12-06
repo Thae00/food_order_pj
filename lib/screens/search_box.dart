@@ -12,6 +12,7 @@ class _SearchBoxState extends State<SearchBox> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
+        color: Palette.boxColor,
         borderRadius: BorderRadius.circular(50),
         border: Border.all(color: Palette.boxColor),
       ),
@@ -23,6 +24,7 @@ class _SearchBoxState extends State<SearchBox> {
           border: InputBorder.none,
           icon: SvgPicture.asset("assets/icons/search.svg"),
           hintText: 'Search Here',
+          hintStyle: TextStyle(color: Palette.showColor),
         ),
       ),
     );

@@ -42,23 +42,33 @@ class _HomeState extends State<Home> {
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
+        selectedItemColor: Palette.speciColor,
+        unselectedItemColor: Palette.showColor,
+        backgroundColor: Palette.boxColor,
         currentIndex: 0,
         items: [
           BottomNavigationBarItem(
-              icon: Icon(
-                Icons.home,
-              ),
-              label: "Home"),
+            backgroundColor: Colors.red,
+            icon: Icon(
+              Icons.home,
+              color: Palette.titleColor,
+            ),
+            label: "Home",
+          ),
           BottomNavigationBarItem(
-              icon: Icon(
-                Icons.shop,
-              ),
-              label: "Cart"),
+            icon: Icon(
+              Icons.shop,
+              color: Palette.titleColor,
+            ),
+            label: "Cart",
+          ),
           BottomNavigationBarItem(
-              icon: Icon(
-                Icons.logout,
-              ),
-              label: "Logout"),
+            icon: Icon(
+              Icons.logout,
+              color: Palette.titleColor,
+            ),
+            label: "Logout",
+          ),
         ],
       ),
       body: Body(),
