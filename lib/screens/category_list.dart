@@ -35,6 +35,15 @@ class _CategoryListState extends State<CategoryList> {
                 itemCount: snapshots.data!.docs.length,
                 itemBuilder: (context, index) {
                   return InkWell(
+                    onTap: () {
+                      setState(() {
+                        categoryProducts = FirebaseFirestore.instance
+                            .collection("products")
+                            .where("category",
+                                isEqualTo: snapshots.data!.docs[index].id)
+                            .get();
+                      });
+                    },
                     child: Container(
                       padding: EdgeInsets.all(20),
                       child: Text(
