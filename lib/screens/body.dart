@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_order_pj/components/discount_card.dart';
 import 'package:food_order_pj/screens/category_list.dart';
 import 'package:food_order_pj/screens/image_slider.dart';
 import 'package:food_order_pj/screens/palette.dart';
@@ -21,6 +22,7 @@ class _BodyState extends State<Body> {
             SearchBox(),
             ImageSlider(),
             CategoryList(),
+            DiscountCard(),
           ],
         ),
       ),
