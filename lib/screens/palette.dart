@@ -21,4 +21,5 @@ class Palette {
   static Color titleColor = Color(0xffE4E5E9);
   static Color showColor = Color(0xff5F697B);
   static Color boxColor = Color(0xff181C2D);
+  static Color priceColor = Color(0xffA9966F);
 } // you
