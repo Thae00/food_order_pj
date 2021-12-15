@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:food_order_pj/carts/cart.dart';
+import 'package:food_order_pj/carts/cart_product.dart';
 import 'package:food_order_pj/models/product.dart';
 import 'package:food_order_pj/screens/palette.dart';
+import 'package:provider/provider.dart';
 
 class DetailScreen extends StatefulWidget {
   String id;
@@ -13,11 +16,33 @@ class DetailScreen extends StatefulWidget {
 }
 
 class _DetailScreenState extends State<DetailScreen> {
+  int counter = 0;
+  int updateCounter = 0;
   @override
   Widget build(BuildContext context) {
+    var cart = Provider.of<Cart>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Product Detail"),
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: Row(
+              children: [
+                SvgPicture.asset(
+                  "assets/icons/bag.svg",
+                  color: Palette.speciColor,
+                ),
+                Text(
+                  "${cart.getLength()}",
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
       body: Container(
         color: Palette.boxColor,
@@ -36,7 +61,8 @@ class _DetailScreenState extends State<DetailScreen> {
                 child: Column(
                   children: [
                     Container(
-                      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 20, vertical: 30),
                       decoration: BoxDecoration(
                         color: Palette.bgColor,
                         borderRadius: BorderRadius.only(
@@ -124,20 +150,50 @@ class _DetailScreenState extends State<DetailScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         IconButton(
-                            onPressed: () {},
-                            icon: Icon(
-                              Icons.remove_circle,
-                              color: Palette.speciColor,
-                            )),
-                        Text(
-                          "0",
-                          style: TextStyle(
-                            color: Palette.priceColor,
-                            fontSize: 20,
+                          onPressed: () {
+                            if (this.counter != 0) {
+                              setState(() {
+                                this.counter--;
+                              });
+                            }
+                            if(this.updateCounter + cart.getCount(CartProduct(this.counter, widget.product)) != 0){
+                              setState(() {
+                                this.updateCounter--;
+                              });
+                            }
+                          },
+                          icon: Icon(
+                            Icons.remove_circle,
+                            color: Palette.speciColor,
                           ),
                         ),
+                        cart.has(CartProduct(this.counter, widget.product))
+                            ? Text(
+                                "${updateCounter + cart.getCount(CartProduct(this.counter, widget.product))}",
+                                style: TextStyle(
+                                  color: Palette.priceColor,
+                                  fontSize: 20,
+                                ),
+                              )
+                            : Text(
+                                "${counter}",
+                                style: TextStyle(
+                                  color: Palette.priceColor,
+                                  fontSize: 20,
+                                ),
+                              ),
                         IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            setState(() {
+                              this.counter++;
+                            });
+
+                            if(cart.has(CartProduct(this.counter, widget.product))){
+                              setState(() {
+                                this.updateCounter++;
+                              });
+                            }
+                          },
                           icon: Icon(
                             Icons.add_circle,
                             color: Palette.speciColor,
@@ -155,6 +211,23 @@ class _DetailScreenState extends State<DetailScreen> {
                       ),
                       width: MediaQuery.of(context).size.width * 0.8,
                       child: InkWell(
+                        onTap: () {
+                          // CartProduct cartProduct =
+                          //     CartProduct(this.counter, widget.product);
+                          // cart.add(cartProduct);
+
+                          //list have condition => true or false
+                          CartProduct cartProduct = CartProduct(this.counter, widget.product);
+                          if(cart.has(cartProduct)){
+                            print(updateCounter);
+                            cart.updateProduct(cartProduct, updateCounter + cart.getCount(CartProduct(this.counter, widget.product)));
+                            setState(() {
+                              updateCounter = 0;
+                            });
+                          } else {
+                            cart.add(cartProduct);
+                          }
+                        },
                         child: Padding(
                           padding: EdgeInsets.all(20),
                           child: Row(
@@ -177,7 +250,9 @@ class _DetailScreenState extends State<DetailScreen> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 20,),
+                    SizedBox(
+                      height: 50,
+                    ),
                   ],
                 ),
               ),

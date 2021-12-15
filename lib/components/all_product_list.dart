@@ -18,7 +18,7 @@ class _AllProductListState extends State<AllProductList> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: StreamBuilder(
+      child: StreamBuilder<QuerySnapshot>(
         stream: allProducts,
         builder: (context, AsyncSnapshot<QuerySnapshot> snapshots) {
           return GridView.builder(
@@ -33,6 +33,7 @@ class _AllProductListState extends State<AllProductList> {
               return InkWell(
                 onTap: () {
                   Product product = Product(
+                    snapshots.data!.docs[index].id,
                     snapshots.data!.docs[index]['name'],
                     snapshots.data!.docs[index]['price'],
                     snapshots.data!.docs[index]['description'],

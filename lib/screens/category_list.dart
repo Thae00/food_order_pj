@@ -32,7 +32,7 @@ class _CategoryListState extends State<CategoryList> {
               height: 80,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                itemCount: snapshots.data!.docs.length,
+                itemCount: snapshots.data !.docs.length,
                 itemBuilder: (context, index) {
                   return InkWell(
                     onTap: () {
@@ -63,7 +63,7 @@ class _CategoryListState extends State<CategoryList> {
         ),
         // For products
         SingleChildScrollView(
-          child: FutureBuilder(
+          child: FutureBuilder<QuerySnapshot<Map<String, dynamic>>>(
             future: categoryProducts,
             builder: (context,
                 AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshots) {
