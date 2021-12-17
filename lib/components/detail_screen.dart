@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:food_order_pj/carts/cart.dart';
 import 'package:food_order_pj/carts/cart_product.dart';
+import 'package:food_order_pj/components/cart_view.dart';
 import 'package:food_order_pj/models/product.dart';
 import 'package:food_order_pj/screens/palette.dart';
 import 'package:provider/provider.dart';
@@ -27,7 +28,9 @@ class _DetailScreenState extends State<DetailScreen> {
         title: Text("Product Detail"),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => CartView()));
+            },
             icon: Row(
               children: [
                 SvgPicture.asset(

@@ -5,6 +5,11 @@ import 'package:food_order_pj/carts/cart_product.dart';
 class Cart extends ChangeNotifier {
   List<CartProduct> cartProduct = [];
 
+  // For cart view list
+  List<CartProduct> getList(){
+    return this.cartProduct;
+  }
+
   add(CartProduct cartPro) {
     this.cartProduct.add(cartPro);
     notifyListeners();
