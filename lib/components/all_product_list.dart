@@ -21,6 +21,12 @@ class _AllProductListState extends State<AllProductList> {
       child: StreamBuilder<QuerySnapshot>(
         stream: allProducts,
         builder: (context, AsyncSnapshot<QuerySnapshot> snapshots) {
+          if (!snapshots.hasData) {
+            return Text('Loading...');
+          }
+          if (snapshots.data!.docs.isEmpty) {
+            return Text('You have no messages.');
+          }
           return GridView.builder(
             physics: ScrollPhysics(),
             shrinkWrap: true,

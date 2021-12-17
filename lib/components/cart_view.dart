@@ -23,7 +23,21 @@ class _CartViewState extends State<CartView> {
             shrinkWrap: true,
             itemCount: cart.getLength(),
             itemBuilder: (context, index) {
-              return Text(cart.getList()[index].product.name);
+              return Card(
+                child: Row(
+                  children: [
+                    Image.network(cart.getList()[index].product.img, width: 100, height: 100,),
+                    Column(
+                      children: [
+                        Container(
+                          child: Text(cart.getList()[index].product.name, style: TextStyle(color: Colors.red),),
+                        ),
+                        Container(child: Text("${cart.getList()[index].product.price}")),
+                      ],
+                    ),
+                  ],
+                ),
+              );
             },
           )
         ],

@@ -28,11 +28,17 @@ class _CategoryListState extends State<CategoryList> {
         StreamBuilder<QuerySnapshot>(
           stream: categories,
           builder: (context, AsyncSnapshot<QuerySnapshot> snapshots) {
+            if (!snapshots.hasData) {
+              return Text('Loading...');
+            }
+            if (snapshots.data!.docs.isEmpty) {
+              return Text('You have no messages.');
+            }
             return Container(
               height: 80,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                itemCount: snapshots.data !.docs.length,
+                itemCount: snapshots.data!.docs.length,
                 itemBuilder: (context, index) {
                   return InkWell(
                     onTap: () {
@@ -67,6 +73,12 @@ class _CategoryListState extends State<CategoryList> {
             future: categoryProducts,
             builder: (context,
                 AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshots) {
+              if (!snapshots.hasData) {
+                return Text('Loading...');
+              }
+              if (snapshots.data!.docs.isEmpty) {
+                return Text('You have no messages.');
+              }
               return Container(
                 height: 220,
                 child: ListView.builder(
