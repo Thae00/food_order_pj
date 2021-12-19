@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:food_order_pj/auth/auth.dart';
+import 'package:food_order_pj/auth/login_status.dart';
+import 'package:food_order_pj/screens/home.dart';
 import 'package:food_order_pj/screens/login_screen.dart';
 import 'package:food_order_pj/screens/palette.dart';
+import 'package:provider/provider.dart';
 
 class RegisterScreen extends StatefulWidget {
   @override
@@ -85,6 +89,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         ),
                                       ),
                                       child: TextFormField(
+                                        style: TextStyle(color: Palette.speciColor),
                                         controller: nameController,
                                         validator: (val) {
                                           if (val == null || val.isEmpty) {
@@ -111,6 +116,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         ),
                                       ),
                                       child: TextFormField(
+                                        style: TextStyle(color: Palette.speciColor),
                                         controller: emailController,
                                         validator: (val) {
                                           if (val == null || val.isEmpty) {
@@ -137,6 +143,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         ),
                                       ),
                                       child: TextFormField(
+                                        style: TextStyle(color: Palette.speciColor),
                                         controller: passwordController,
                                         validator: (val) {
                                           if (val == null || val.isEmpty) {
@@ -170,8 +177,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   color: Palette.speciColor,
                                 ),
                                 child: OutlinedButton(
-                                  onPressed: () {
-                                    if (key.currentState!.validate()) {}
+                                  onPressed: () async {
+                                    if (key.currentState!.validate()) {
+                                     Map<String,dynamic> status = await Auth().register(emailController.text, passwordController.text);
+                                     if(status['status']){
+                                       Provider.of<LoginStatus>(context, listen: false).setStatus(true);
+                                       Navigator.push(context, MaterialPageRoute(builder: (context)=> Home()));
+                                     }
+                                    }
                                   },
                                   child: Text(
                                     'Register',
