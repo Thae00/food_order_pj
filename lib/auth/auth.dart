@@ -13,4 +13,13 @@ class Auth {
   logout(){
     FirebaseAuth.instance.signOut();
   }
+
+  Future<Map<String,dynamic>> login(String email,String password) async{
+   Map<String,dynamic> result = {"status": false};
+   try{
+     UserCredential user = await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password);
+     result["status"] = true;
+   } catch(e){}
+   return result;
+  }
 }

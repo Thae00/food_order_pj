@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_order_pj/auth/auth.dart';
 import 'package:food_order_pj/auth/login_status.dart';
+import 'package:food_order_pj/main.dart';
 import 'package:food_order_pj/screens/home.dart';
 import 'package:food_order_pj/screens/login_screen.dart';
 import 'package:food_order_pj/screens/palette.dart';
@@ -182,7 +183,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                      Map<String,dynamic> status = await Auth().register(emailController.text, passwordController.text);
                                      if(status['status']){
                                        Provider.of<LoginStatus>(context, listen: false).setStatus(true);
-                                       Navigator.push(context, MaterialPageRoute(builder: (context)=> Home()));
+                                       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MyApp()));
                                      }
                                     }
                                   },

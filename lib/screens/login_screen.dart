@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:food_order_pj/auth/auth.dart';
+import 'package:food_order_pj/auth/login_status.dart';
+import 'package:food_order_pj/main.dart';
 import 'package:food_order_pj/screens/palette.dart';
 import 'package:food_order_pj/screens/register_screen.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -83,6 +87,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                         ),
                                       ),
                                       child: TextFormField(
+                                        style: TextStyle(color: Palette.speciColor),
                                         controller: emailController,
                                         validator: (val) {
                                           if (val == null || val.isEmpty) {
@@ -109,6 +114,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                         ),
                                       ),
                                       child: TextFormField(
+                                        style: TextStyle(color: Palette.speciColor),
                                         controller: passwordController,
                                         validator: (val) {
                                           if (val == null || val.isEmpty) {
@@ -142,8 +148,14 @@ class _LoginScreenState extends State<LoginScreen> {
                                   color: Palette.speciColor,
                                 ),
                                 child: OutlinedButton(
-                                  onPressed: () {
-                                    if (key.currentState!.validate()) {}
+                                  onPressed: () async {
+                                    if (key.currentState!.validate()) {
+                                      Map<String,dynamic> result = await Auth().login(emailController.text, passwordController.text);
+                                      if(result['status']){
+                                        Provider.of<LoginStatus>(context, listen: false).setStatus(true);
+                                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MyApp()));
+                                      }
+                                    }
                                   },
                                   child: Text(
                                     'Login',
