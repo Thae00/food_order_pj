@@ -5,6 +5,16 @@ import 'package:food_order_pj/carts/cart_product.dart';
 class Cart extends ChangeNotifier {
   List<CartProduct> cartProduct = [];
 
+  // For cart delete
+  deleteProduct(CartProduct pro){
+    this.cartProduct.forEach((element) {
+      if(element.product.id == pro.product.id){
+        this.cartProduct.remove(element);
+        notifyListeners();
+      }
+    });
+  }
+
   // For cart view list
   List<CartProduct> getList(){
     return this.cartProduct;
