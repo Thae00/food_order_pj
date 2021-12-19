@@ -9,4 +9,8 @@ class Auth {
     } catch(e){}
     return status;
   }
+
+  logout(){
+    FirebaseAuth.instance.signOut();
+  }
 }

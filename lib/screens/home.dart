@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:food_order_pj/auth/auth.dart';
+import 'package:food_order_pj/auth/login_status.dart';
+import 'package:food_order_pj/main.dart';
 import 'package:food_order_pj/screens/body.dart';
 import 'package:food_order_pj/screens/palette.dart';
+import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -42,6 +46,13 @@ class _HomeState extends State<Home> {
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
+        onTap: (index){
+          if(index == 2){
+            Auth().logout();
+            Provider.of<LoginStatus>(context,listen: false).setStatus(false);
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MyApp()));
+          }
+        },
         selectedItemColor: Palette.speciColor,
         unselectedItemColor: Palette.showColor,
         backgroundColor: Palette.boxColor,
