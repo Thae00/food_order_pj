@@ -5,10 +5,14 @@ import 'package:food_order_pj/carts/cart_product.dart';
 class Cart extends ChangeNotifier {
   List<CartProduct> cartProduct = [];
 
+  dynamic totalAmt = 0; //for total amount
+
   // For cart delete
   deleteProduct(CartProduct pro){
     this.cartProduct.forEach((element) {
       if(element.product.id == pro.product.id){
+
+        totalAmt -= element.product.price * element.counter;
         this.cartProduct.remove(element);
         notifyListeners();
       }
@@ -22,6 +26,8 @@ class Cart extends ChangeNotifier {
 
   add(CartProduct cartPro) {
     this.cartProduct.add(cartPro);
+
+    totalAmt += cartPro.counter * cartPro.product.price;
     notifyListeners();
   }
 
@@ -57,7 +63,10 @@ class Cart extends ChangeNotifier {
   updateProduct(CartProduct pro, int count) {
     this.cartProduct.forEach((element) {
       if (element.product.id == pro.product.id) {
+        totalAmt -= element.counter * element.product.price;
+        totalAmt += pro.product.price * count;
         element.counter = count;
+
       }
     });
     notifyListeners();

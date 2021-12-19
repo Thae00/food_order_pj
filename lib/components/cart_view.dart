@@ -47,7 +47,9 @@ class _CartViewState extends State<CartView> {
                               style: TextStyle(color: Palette.titleColor),
                             ),
                           ),
-                          SizedBox(height: 5,),
+                          SizedBox(
+                            height: 5,
+                          ),
                           Container(
                             child: Text(
                               "${cart.getList()[index].product.price} MMK",
@@ -65,7 +67,9 @@ class _CartViewState extends State<CartView> {
                             "Qty",
                             style: TextStyle(color: Palette.titleColor),
                           ),
-                          SizedBox(height: 5,),
+                          SizedBox(
+                            height: 5,
+                          ),
                           Text(
                             "${cart.getList()[index].counter}",
                             style: TextStyle(
@@ -107,6 +111,46 @@ class _CartViewState extends State<CartView> {
                   ),
                 );
               },
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SizedBox(
+                  width: 20,
+                ),
+                Text(
+                  "Total Amount",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Palette.titleColor),
+                ),
+                Text(
+                  "${cart.totalAmt} MMK",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Palette.speciColor),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Container(
+              width: MediaQuery.of(context).size.width * 0.5,
+              decoration: BoxDecoration(
+                color: Palette.speciColor,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: TextButton(
+                onPressed: () {},
+                child: Text(
+                  "CheckOut",
+                  style: TextStyle(
+                    color: Palette.titleColor,
+                  ),
+                ),
+              ),
             )
           ],
         ),
