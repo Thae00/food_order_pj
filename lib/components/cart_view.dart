@@ -1,4 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:food_order_pj/auth/order.dart';
 import 'package:food_order_pj/carts/cart.dart';
 import 'package:food_order_pj/screens/palette.dart';
 import 'package:provider/provider.dart';
@@ -143,7 +146,15 @@ class _CartViewState extends State<CartView> {
                 borderRadius: BorderRadius.circular(10),
               ),
               child: TextButton(
-                onPressed: () {},
+                onPressed: () async {
+                  var user = FirebaseAuth.instance.currentUser;
+                  if (user != null){
+                    //print(user.email);
+                    //for user order save in firebaseFirestore
+                    DocumentReference doc = await Order().createCustomer(user.email!);
+                    //print(doc.id);
+                  }
+                },
                 child: Text(
                   "CheckOut",
                   style: TextStyle(
