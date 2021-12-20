@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:food_order_pj/auth/order.dart';
 import 'package:food_order_pj/carts/cart.dart';
+import 'package:food_order_pj/main.dart';
 import 'package:food_order_pj/screens/palette.dart';
 import 'package:provider/provider.dart';
 
@@ -156,6 +157,8 @@ class _CartViewState extends State<CartView> {
                     cart.getList().forEach((element) {
                       Order().createOrder(element.counter, element.product, doc.id);
                     });
+                    cart.orderClear();
+                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MyApp()));
                   }
                 },
                 child: Text(

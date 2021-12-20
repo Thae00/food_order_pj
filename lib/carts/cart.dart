@@ -71,4 +71,9 @@ class Cart extends ChangeNotifier {
     });
     notifyListeners();
   }
+
+  void orderClear(){
+    this.cartProduct.clear();
+    notifyListeners();
+  }
 }
