@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:food_order_pj/admin/show_order.dart';
 import 'package:food_order_pj/auth/order.dart';
 import 'package:food_order_pj/screens/palette.dart';
 
@@ -53,7 +54,9 @@ class _AdminState extends State<Admin> {
                         ),
                       ),
                       IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => ShowOrder(snapshots.data!.docs[index].id)));
+                        },
                         icon: Icon(
                           Icons.remove_red_eye,
                           color: Palette.priceColor,

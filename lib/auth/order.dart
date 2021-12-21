@@ -23,4 +23,9 @@ class Order {
     Stream<QuerySnapshot> customers = FirebaseFirestore.instance.collection("customers").snapshots();
     yield* customers;
   }
+
+  Future<QuerySnapshot<Map<String,dynamic>>> getOrder(String id) async {
+    QuerySnapshot<Map<String,dynamic>> order = await FirebaseFirestore.instance.collection("orders").where("customer_id", isEqualTo: id).get();
+    return order;
+  }
 }
