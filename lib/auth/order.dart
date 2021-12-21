@@ -18,4 +18,9 @@ class Order {
       "customer_id": id
     });
   }
+
+  Stream<QuerySnapshot> getCustomers() async* {
+    Stream<QuerySnapshot> customers = FirebaseFirestore.instance.collection("customers").snapshots();
+    yield* customers;
+  }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:food_order_pj/admin/admin.dart';
 import 'package:food_order_pj/auth/auth.dart';
 import 'package:food_order_pj/auth/login_status.dart';
 import 'package:food_order_pj/main.dart';
@@ -46,17 +47,21 @@ class _HomeState extends State<Home> {
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
-        onTap: (index){
-          if(index == 2){
+        onTap: (index) {
+          if (index == 3) {
             Auth().logout();
-            Provider.of<LoginStatus>(context,listen: false).setStatus(false);
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MyApp()));
+            Provider.of<LoginStatus>(context, listen: false).setStatus(false);
+            Navigator.pushReplacement(
+                context, MaterialPageRoute(builder: (context) => MyApp()));
+          } else if (index == 2){
+            Navigator.push(context, MaterialPageRoute(builder: (context) => Admin()));
           }
         },
         selectedItemColor: Palette.speciColor,
         unselectedItemColor: Palette.showColor,
         backgroundColor: Palette.boxColor,
         currentIndex: 0,
+        type: BottomNavigationBarType.fixed,
         items: [
           BottomNavigationBarItem(
             backgroundColor: Colors.red,
@@ -72,6 +77,10 @@ class _HomeState extends State<Home> {
               color: Palette.titleColor,
             ),
             label: "Cart",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings, color: Palette.titleColor),
+            label: "admin",
           ),
           BottomNavigationBarItem(
             icon: Icon(
