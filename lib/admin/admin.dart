@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:food_order_pj/auth/order.dart';
+import 'package:food_order_pj/screens/palette.dart';
 
 class Admin extends StatefulWidget {
   @override
@@ -11,11 +12,16 @@ class _AdminState extends State<Admin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Admin Pannel'),),
+      appBar: AppBar(
+        title: Text(
+          'Admin Pannel',
+          style: TextStyle(color: Palette.titleColor),
+        ),
+      ),
       body: SingleChildScrollView(
         child: StreamBuilder(
           stream: Order().getCustomers(),
-          builder: (context,AsyncSnapshot<QuerySnapshot> snapshots){
+          builder: (context, AsyncSnapshot<QuerySnapshot> snapshots) {
             if (!snapshots.hasData) {
               return Text('Loading...');
             }
@@ -25,9 +31,46 @@ class _AdminState extends State<Admin> {
             return ListView.builder(
               shrinkWrap: true,
               itemCount: snapshots.data!.docs.length,
-                itemBuilder: (context, index){
-                return Text("Hay");
-                });
+              itemBuilder: (context, index) {
+                //return Text("Hay");
+                return Card(
+                  color: Palette.boxColor,
+                  elevation: 5,
+                  shadowColor: Palette.priceColor,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Container(
+                        width: MediaQuery.of(context).size.width * 0.6,
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 40, vertical: 20),
+                        child: Text(
+                          "${snapshots.data!.docs[index]['email']}",
+                          style: TextStyle(
+                            color: Palette.titleColor,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: () {},
+                        icon: Icon(
+                          Icons.remove_red_eye,
+                          color: Palette.priceColor,
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: () {},
+                        icon: Icon(
+                          Icons.delete,
+                          color: Palette.speciColor,
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              },
+            );
           },
         ),
       ),
