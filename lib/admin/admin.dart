@@ -55,7 +55,15 @@ class _AdminState extends State<Admin> {
                       ),
                       IconButton(
                         onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => ShowOrder(snapshots.data!.docs[index].id)));
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ShowOrder(
+                                snapshots.data!.docs[index].id,
+                                snapshots.data!.docs[index]['total'],
+                              ),
+                            ),
+                          );
                         },
                         icon: Icon(
                           Icons.remove_red_eye,

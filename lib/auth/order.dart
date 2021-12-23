@@ -2,9 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:food_order_pj/models/product.dart';
 
 class Order {
-  Future<DocumentReference> createCustomer(String email) async {
+  Future<DocumentReference> createCustomer(String email, String amt) async {
     DocumentReference doc = await FirebaseFirestore.instance.collection('customers').add({
-      "email": email
+      "email": email,
+      "total": amt,
     });
     return doc;
   }

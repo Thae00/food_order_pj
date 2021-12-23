@@ -152,7 +152,7 @@ class _CartViewState extends State<CartView> {
                   if (user != null){
                     //print(user.email);
                     //for user order save in firebaseFirestore
-                    DocumentReference doc = await Order().createCustomer(user.email!);
+                    DocumentReference doc = await Order().createCustomer(user.email!, cart.totalAmt.toString());
                     //print(doc.id);
                     cart.getList().forEach((element) {
                       Order().createOrder(element.counter, element.product, doc.id);
