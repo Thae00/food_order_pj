@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class Auth {
@@ -6,6 +7,12 @@ class Auth {
     try {
       UserCredential user = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: password);
       status['status'] = true;
+
+      //register with get role& user_id
+      FirebaseFirestore.instance.collection("role").add({
+        "role": "",
+        "user_id": user.user!.uid,
+      });
     } catch(e){}
     return status;
   }
