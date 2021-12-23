@@ -71,7 +71,9 @@ class _AdminState extends State<Admin> {
                         ),
                       ),
                       IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Order().deleteOrder(snapshots.data!.docs[index].id);
+                        },
                         icon: Icon(
                           Icons.delete,
                           color: Palette.speciColor,

@@ -29,4 +29,13 @@ class Order {
     QuerySnapshot<Map<String,dynamic>> orders = await FirebaseFirestore.instance.collection("orders").where("customer_id", isEqualTo: id).get();
     return orders;
   }
+
+  void deleteOrder(String id) async {
+    QuerySnapshot<Map<String,dynamic>> orders = await FirebaseFirestore.instance.collection("orders").where("customer_id", isEqualTo: id).get();
+    orders.docs.forEach((element) { 
+      FirebaseFirestore.instance.collection("orders").doc(element.id).delete();
+    });
+    FirebaseFirestore.instance.collection("customers").doc(id).delete();
+  }
+
 }
