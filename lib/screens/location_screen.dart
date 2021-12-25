@@ -1,10 +1,16 @@
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:food_order_pj/main.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 
 class LocationScreen extends StatefulWidget {
+
+  String customerId;
+  LocationScreen(this.customerId);
+
   @override
   _LocationScreenState createState() => _LocationScreenState();
 }
@@ -28,7 +34,13 @@ class _LocationScreenState extends State<LocationScreen> {
   Widget build(BuildContext context) {
     return this.loading? Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          FirebaseFirestore.instance.collection("customers").doc(widget.customerId).update({
+            "lat": currentLocation.latitude,
+            "log": currentLocation.longitude,
+          });
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MyApp()));
+        },
         child: Text("Save"),
       ),
       body: GoogleMap(

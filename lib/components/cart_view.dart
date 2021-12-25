@@ -159,7 +159,7 @@ class _CartViewState extends State<CartView> {
                       Order().createOrder(element.counter, element.product, doc.id);
                     });
                     cart.orderClear();
-                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LocationScreen()));
+                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LocationScreen(doc.id)));
                   }
                 },
                 child: Text(
