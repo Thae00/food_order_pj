@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:food_order_pj/auth/order.dart';
 import 'package:food_order_pj/carts/cart.dart';
 import 'package:food_order_pj/main.dart';
+import 'package:food_order_pj/screens/location_screen.dart';
 import 'package:food_order_pj/screens/palette.dart';
 import 'package:provider/provider.dart';
 
@@ -158,7 +159,7 @@ class _CartViewState extends State<CartView> {
                       Order().createOrder(element.counter, element.product, doc.id);
                     });
                     cart.orderClear();
-                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MyApp()));
+                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LocationScreen()));
                   }
                 },
                 child: Text(

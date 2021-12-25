@@ -3,6 +3,8 @@
    <application
         android:label="food_order_pj"
         android:icon="@mipmap/ic_launcher">
+       <meta-data android:name="com.google.android.geo.API_KEY"
+           android:value="AIzaSyAk69ED6cpzN9K_zYsrL_nCY3dfMZ5VLNI"/>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

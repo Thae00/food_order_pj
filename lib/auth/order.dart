@@ -6,6 +6,8 @@ class Order {
     DocumentReference doc = await FirebaseFirestore.instance.collection('customers').add({
       "email": email,
       "total": amt,
+      "lat": 0,
+      "log": 0,
     });
     return doc;
   }
