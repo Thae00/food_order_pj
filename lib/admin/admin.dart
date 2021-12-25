@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:food_order_pj/admin/show_order.dart';
 import 'package:food_order_pj/auth/order.dart';
 import 'package:food_order_pj/screens/palette.dart';
+import 'package:food_order_pj/screens/user_location.dart';
 
 class Admin extends StatefulWidget {
   @override
@@ -42,7 +43,7 @@ class _AdminState extends State<Admin> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Container(
-                        width: MediaQuery.of(context).size.width * 0.6,
+                        width: MediaQuery.of(context).size.width * 0.5,
                         padding:
                             EdgeInsets.symmetric(horizontal: 40, vertical: 20),
                         child: Text(
@@ -68,6 +69,23 @@ class _AdminState extends State<Admin> {
                         icon: Icon(
                           Icons.remove_red_eye,
                           color: Palette.priceColor,
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => UserLocation(
+                                snapshots.data!.docs[index]['lat'],
+                                snapshots.data!.docs[index]['log'],
+                              ),
+                            ),
+                          );
+                        },
+                        icon: Icon(
+                          Icons.map_sharp,
+                          color: Palette.showColor,
                         ),
                       ),
                       IconButton(
